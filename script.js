@@ -168,23 +168,37 @@ const renderError = (message) => {
   countriesContainer.style.opacity = 1;
 };
 
+const getJSON = function (url, errMessage = 'Something went wrong!') {
+  return fetch(url).then((respone) => {
+    if (!respone.ok) {
+      throw new Error(`${errMessage} ${respone.status}`);
+    }
+
+    return respone.json();
+  });
+};
+
 const getCountryData = (country) => {
-  // 1) Country 1
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((respone) => respone.json())
+  getJSON(`https://restcountries.com/v3.1/name/${country}`, `Country not found`)
     .then((data) => {
       renderCountry(data[0], '');
 
       // 2) Country 2
       const neighbour = data[0]?.borders?.at(0);
-      if (!neighbour) return;
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      if (!neighbour) {
+        throw new Error(`Neighbour not found!`);
+      }
+
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour}`,
+        `Neighbour not found`,
+      );
     })
-    .then((respone) => respone.json())
     .then((data2) => renderCountry(data2[0], 'neighbour'))
-    .catch((err) => renderError('Something went wrong!'))
-    .finally(() => {
-      alert('App run success!');
+    .catch((err) => {
+      alert(`Something went wrong! ${err.message}`);
+      // console.log(`🚀  err =>`, err.message);
+      // renderError('Something went wrong!');
     });
 };
 

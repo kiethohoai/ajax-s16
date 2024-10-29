@@ -5,3 +5,4 @@
 009 Consuming Promises
 010 Chaining Promises
 011 Handling Rejected Promises
+012 Throwing Errors Manually
