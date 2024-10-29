@@ -2,3 +2,4 @@
 006 How the Web Works Requests and Responses
 007 Welcome to Callback Hell
 008 Promises and the Fetch API
+009 Consuming Promises
