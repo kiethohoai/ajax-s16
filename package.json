@@ -1,0 +1,14 @@
+{
+  "name": "s16",
+  "version": "1.0.0",
+  "description": "005 Our First AJAX Call XMLHttpRequest\r 006 How the Web Works Requests and Responses\r 007 Welcome to Callback Hell\r 008 Promises and the Fetch API\r 009 Consuming Promises\r 010 Chaining Promises",
+  "main": "script.js",
+  "scripts": {
+    "sv": "live-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}

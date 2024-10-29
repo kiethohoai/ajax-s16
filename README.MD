@@ -4,3 +4,4 @@
 008 Promises and the Fetch API
 009 Consuming Promises
 010 Chaining Promises
+011 Handling Rejected Promises
