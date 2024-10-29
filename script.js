@@ -4,7 +4,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
-
+/* 
 const getCountryData = country => {
   const request = new XMLHttpRequest();
   request.open(
@@ -74,4 +74,64 @@ const getCountryData2 = country => {
 };
 
 getCountryData('portugal');
-getCountryData2('vietnam');
+getCountryData2('vietnam'); */
+
+const renderCountry = (data, className) => {
+  const html = `
+    <article class="country ${className}">
+      <img class="country__img" src="${data.flags.png}" />
+      <div class="country__data">
+        <h3 class="country__name">${data.name.common}</h3>
+        <h4 class="country__region">${data.region}</h4>
+        <p class="country__row"><span>👫</span>${(
+          +data.population / 1000000
+        ).toFixed(1)} people</p>
+        <p class="country__row"><span>🗣️</span>${data.languages.por}</p>
+        <p class="country__row"><span>💰</span>${data.currencies.EUR.name} ${
+    data.currencies.EUR.symbol
+  }</p>
+      </div>
+    </article>
+  `;
+
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
+};
+
+const getCountryAndNeigbour = country => {
+  // Ajax call country 1
+  const request = new XMLHttpRequest();
+  request.open(
+    'GET',
+    `https://restcountries.com/v3.1/name/${country}?fullText=true`
+  );
+  request.send();
+
+  request.addEventListener('load', function () {
+    const res = JSON.parse(this.responseText);
+    const data = res[0];
+    console.log(`🚀  data =>`, data);
+
+    // Render country
+    renderCountry(data, '');
+
+    // Render neighbour country
+    const neighbour = data.borders.at(0);
+
+    // Guard
+    if (!neighbour) return;
+
+    // Ajax call country 2
+    const request2 = new XMLHttpRequest();
+    request2.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour}`);
+    request2.send();
+
+    request2.addEventListener('load', function () {
+      const res = JSON.parse(this.responseText);
+      const data2 = res[0];
+      console.log(`🚀  data2 =>`, data2);
+      renderCountry(data2, 'neighbour');
+    });
+  });
+};
+getCountryAndNeigbour('portugal');
