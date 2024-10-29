@@ -3,3 +3,4 @@
 007 Welcome to Callback Hell
 008 Promises and the Fetch API
 009 Consuming Promises
+010 Chaining Promises

@@ -163,23 +163,32 @@ const renderCountry = (data, className) => {
   countriesContainer.style.opacity = 1;
 };
 
-const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(function (respone) {
-      console.log(`🚀  respone =>`, respone);
-      return respone.json();
-    })
-    .then((data) => {
-      console.log(`🚀  data =>`, data);
-      renderCountry(data[0], '');
-    });
-};
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(function (respone) {
+//       console.log(`🚀  respone =>`, respone);
+//       return respone.json();
+//     })
+//     .then((data) => {
+//       console.log(`🚀  data =>`, data);
+//       renderCountry(data[0], '');
+//     });
+// };
 
-const getCountryData2 = (country) => {
+const getCountryData = (country) => {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((respone) => respone.json())
-    .then((data) => renderCountry(data[0], ''));
+    .then((data) => {
+      renderCountry(data[0], '');
+
+      // Country 2
+      const neighbour = data[0].borders?.at(0);
+      console.log(`🚀  neighbour =>`, neighbour);
+      if (!neighbour) return;
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+    })
+    .then((respone) => respone.json())
+    .then((data2) => renderCountry(data2[0], 'neighbour'));
 };
 
 getCountryData('portugal');
-getCountryData2('portugal');
