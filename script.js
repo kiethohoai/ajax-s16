@@ -76,6 +76,7 @@ const getCountryData2 = country => {
 getCountryData('portugal');
 getCountryData2('vietnam'); */
 
+/* 
 const renderCountry = (data, className) => {
   const html = `
     <article class="country ${className}">
@@ -135,3 +136,7 @@ const getCountryAndNeigbour = country => {
   });
 };
 getCountryAndNeigbour('portugal');
+ */
+
+const res = fetch(`https://restcountries.com/v3.1/name/portugal`);
+console.log(`🚀  res =>`, res.json());
