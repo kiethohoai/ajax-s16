@@ -25,7 +25,7 @@ const lastPost2 = await getLastPost();
 console.log(`🚀  lastPost =>`, lastPost);
 console.log(`🚀  lastPost2 =>`, lastPost2); */
 
-const ShoppingCart = (() => {
+/* const ShoppingCart = (() => {
   const cart = [];
   const shippingCost = 10;
   const totalPrice = 237;
@@ -50,4 +50,6 @@ const ShoppingCart = (() => {
 
 ShoppingCart.addToCart('Apple', 4);
 ShoppingCart.addToCart('Pizza', 2);
-console.log(`🚀  ShoppingCart =>`, ShoppingCart)
+console.log(`🚀  ShoppingCart =>`, ShoppingCart) */
+
+//todo 008 CommonJS Modules
