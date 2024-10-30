@@ -1,11 +1,23 @@
-//todo 009 A Brief Introduction to the Command Line
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 
-import { cloneDeep } from 'lodash';
-const o1 = {
+const john = {
   name: 'John',
   age: 30,
-  city: 'New York',
-  sayHello: function () {
-    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old`);
+  social: {
+    twitter: '@john',
+    facebook: 'john.doe',
+    instagram: {
+      name: 'john',
+      age: 30,
+      social: {
+        twitter: '@john',
+        facebook: 'john.doe',
+      },
+    },
   },
+  hobbies: ['swimming', 'playing video games'],
 };
+
+const david = cloneDeep(john);
+console.log(`🚀  john =>`, john);
+console.log(`🚀  david =>`, david);

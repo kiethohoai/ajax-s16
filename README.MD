@@ -26,3 +26,4 @@
 008 CommonJS Modules
 009 A Brief Introduction to the Command Line
 010 Introduction to NPM
+011 Bundling With Parcel and NPM Scripts
