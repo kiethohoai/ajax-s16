@@ -1,4 +1,4 @@
-const shippingCost = 10;
+/* const shippingCost = 10;
 const cart = [];
 
 export const addToCart = (product, quantity) => {
@@ -12,3 +12,4 @@ const totalQuantity = 10;
 export { totalPrice, totalQuantity };
 
 export default addToCart;
+ */

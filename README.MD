@@ -22,3 +22,4 @@
 004 An Overview of Modules in JavaScript
 005 Exporting and Importing in ES6 Modules
 006 Top-Level await (ES2022)
+007 The Module Pattern
