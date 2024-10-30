@@ -406,13 +406,13 @@ whereAmI(`portugal`); */
 //   console.log(`🚀  res =>`, res[0]);
 // });
 
-const timeout = function (sec) {
-  return new Promise((_, reject) => {
-    setTimeout(() => {
-      reject(new Error(`Request took too long!`));
-    }, sec);
-  });
-};
+// const timeout = function (sec) {
+//   return new Promise((_, reject) => {
+//     setTimeout(() => {
+//       reject(new Error(`Request took too long!`));
+//     }, sec);
+//   });
+// };
 
 // Promise.race([getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`), timeout(5000)])
 //   .then((res) => console.log(res[0]))
@@ -431,20 +431,22 @@ const timeout = function (sec) {
 //     console.log(`🚀  err =>`, err);
 //   });
 
-const getJSON = function (url, errMessage = 'Something went wrong!') {
-  return fetch(url).then((respone) => {
-    if (!respone.ok) {
-      throw new Error(`${errMessage} ${respone.status}`);
-    }
-    return respone.json();
-  });
-};
+// const getJSON = function (url, errMessage = 'Something went wrong!') {
+//   return fetch(url).then((respone) => {
+//     if (!respone.ok) {
+//       throw new Error(`${errMessage} ${respone.status}`);
+//     }
+//     return respone.json();
+//   });
+// };
 
-// Promise.any
-Promise.any([
-  getJSON(`https://restcountries.com/v3.1/name/usa?fullText=true`),
-  getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`),
-  getJSON(`https://restcountries.com/v3.1/name/vietnam?fullText=true`),
-])
-  .then((res) => console.log(`res: `, res))
-  .catch((err) => console.log(`🚀  err =>`, err));
+// // Promise.any
+// Promise.any([
+//   getJSON(`https://restcountries.com/v3.1/name/usa?fullText=true`),
+//   getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`),
+//   getJSON(`https://restcountries.com/v3.1/name/vietnam?fullText=true`),
+// ])
+//   .then((res) => console.log(`res: `, res))
+//   .catch((err) => console.log(`🚀  err =>`, err));
+
+// 024 Coding Challenge #3

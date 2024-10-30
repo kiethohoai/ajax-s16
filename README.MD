@@ -16,3 +16,6 @@
 021 Returning Values from Async Functions
 022 Running Promises in Parallel
 023 Other Promise Combinators race, allSettled and any
+024 Coding Challenge #3
+
+17 Modern JavaScript Development Modules, Tooling, and Functional
