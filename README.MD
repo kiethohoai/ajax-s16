@@ -14,3 +14,4 @@
 019 Consuming Promises with AsyncAwait
 020 Error Handling With try...catch
 021 Returning Values from Async Functions
+022 Running Promises in Parallel

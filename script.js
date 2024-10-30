@@ -367,10 +367,38 @@ const whereAmI = async (country) => {
 whereAmI(`portugal`); */
 
 // 020 Error Handling With try...catch
-try {
+/* try {
   const x = 1;
   let y = 2;
   x = y;
 } catch (error) {
   console.log(`🚀  error =>`, error);
-}
+} */
+
+// 022 Running Promises in Parallel
+
+const getJSON = function (url, errMessage = 'Something went wrong!') {
+  return fetch(url).then((respone) => {
+    if (!respone.ok) {
+      throw new Error(`${errMessage} ${respone.status}`);
+    }
+    return respone.json();
+  });
+};
+
+const get3Countries = async (c1, c2, c3) => {
+  try {
+    const p1 = getJSON(`https://restcountries.com/v3.1/name/${c1}?fullText=true`);
+    const p2 = getJSON(`https://restcountries.com/v3.1/name/${c2}?fullText=true`);
+    const p3 = getJSON(`https://restcountries.com/v3.1/name/${c3}?fullText=true`);
+
+    const data = await Promise.all([p1, p2, p3]);
+    console.log(`🚀  data =>`, data);
+
+    console.log(data.map((d) => d[0].capital));
+  } catch (error) {
+    console.log(`🚀error =>`, error);
+  }
+};
+
+get3Countries('portugal', 'canada', 'germany');
