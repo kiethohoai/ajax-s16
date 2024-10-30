@@ -377,6 +377,60 @@ whereAmI(`portugal`); */
 
 // 022 Running Promises in Parallel
 
+// const get3Countries = async (c1, c2, c3) => {
+//   try {
+//     const p1 = getJSON(`https://restcountries.com/v3.1/name/${c1}?fullText=true`);
+//     const p2 = getJSON(`https://restcountries.com/v3.1/name/${c2}?fullText=true`);
+//     const p3 = getJSON(`https://restcountries.com/v3.1/name/${c3}?fullText=true`);
+
+//     const data = await Promise.all([p1, p2, p3]);
+//     console.log(`🚀  data =>`, data);
+
+//     console.log(data.map((d) => d[0].capital));
+//   } catch (error) {
+//     console.log(`🚀error =>`, error);
+//   }
+// };
+
+// get3Countries('portugal', 'canada', 'germany');
+
+// 023 Other Promise Combinators race, allSettled and any
+// Promise.race
+// (async () => {
+//   const res = await Promise.race([
+//     getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`),
+//     getJSON(`https://restcountries.com/v3.1/name/canada?fullText=true`),
+//     getJSON(`https://restcountries.com/v3.1/name/germany?fullText=true`),
+//   ]);
+
+//   console.log(`🚀  res =>`, res[0]);
+// });
+
+const timeout = function (sec) {
+  return new Promise((_, reject) => {
+    setTimeout(() => {
+      reject(new Error(`Request took too long!`));
+    }, sec);
+  });
+};
+
+// Promise.race([getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`), timeout(5000)])
+//   .then((res) => console.log(res[0]))
+//   .catch((err) => console.log(err));
+
+// Promise.allSettled;
+// Promise.allSettled([
+//   getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`),
+//   getJSON(`https://restcountries.com/v3.1/name/vietnam?fullText=true`),
+//   getJSON(`https://restcountries.com/v3.1/name/usa?fullText=true`),
+// ])
+//   .then((res) => {
+//     console.log(`🚀  res =>`, res);
+//   })
+//   .catch((err) => {
+//     console.log(`🚀  err =>`, err);
+//   });
+
 const getJSON = function (url, errMessage = 'Something went wrong!') {
   return fetch(url).then((respone) => {
     if (!respone.ok) {
@@ -386,19 +440,11 @@ const getJSON = function (url, errMessage = 'Something went wrong!') {
   });
 };
 
-const get3Countries = async (c1, c2, c3) => {
-  try {
-    const p1 = getJSON(`https://restcountries.com/v3.1/name/${c1}?fullText=true`);
-    const p2 = getJSON(`https://restcountries.com/v3.1/name/${c2}?fullText=true`);
-    const p3 = getJSON(`https://restcountries.com/v3.1/name/${c3}?fullText=true`);
-
-    const data = await Promise.all([p1, p2, p3]);
-    console.log(`🚀  data =>`, data);
-
-    console.log(data.map((d) => d[0].capital));
-  } catch (error) {
-    console.log(`🚀error =>`, error);
-  }
-};
-
-get3Countries('portugal', 'canada', 'germany');
+// Promise.any
+Promise.any([
+  getJSON(`https://restcountries.com/v3.1/name/usa?fullText=true`),
+  getJSON(`https://restcountries.com/v3.1/name/portugal?fullText=true`),
+  getJSON(`https://restcountries.com/v3.1/name/vietnam?fullText=true`),
+])
+  .then((res) => console.log(`res: `, res))
+  .catch((err) => console.log(`🚀  err =>`, err));

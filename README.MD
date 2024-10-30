@@ -15,3 +15,4 @@
 020 Error Handling With try...catch
 021 Returning Values from Async Functions
 022 Running Promises in Parallel
+023 Other Promise Combinators race, allSettled and any
