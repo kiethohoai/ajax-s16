@@ -256,7 +256,9 @@ getPosition()
   .catch((err) => console.log(err)); */
 
 // 018 Coding Challenge #2
+/* 
 const imgContainer = document.querySelector('.images');
+let curImage;
 
 const wait = function (seconds) {
   return new Promise((resolve) => {
@@ -264,43 +266,102 @@ const wait = function (seconds) {
   });
 };
 
-const createImage = (imgPath) => {
-  return new Promise(function (resolve, reject) {
+const createImage = (imagePath) => {
+  return new Promise((resolve, reject) => {
     const img = document.createElement('img');
-    img.src = imgPath;
+    img.src = imagePath;
 
-    img.addEventListener('load', function () {
+    img.addEventListener('load', () => {
       imgContainer.append(img);
       resolve(img);
     });
 
     img.addEventListener('error', () => {
-      reject(new Error(`Image not found!`));
+      reject(new Error(`Image not found`));
     });
   });
 };
 
-let curImage;
-
 createImage('img/img-1.jpg')
   .then((img) => {
     curImage = img;
-    console.log(`Image 1 loaded`);
-    return wait(2);
+    console.log(`Image 1 loaded!`);
+    return wait(3);
   })
   .then(() => {
-    // Hide image
     curImage.style.display = 'none';
     return createImage('img/img-2.jpg');
   })
   .then((img) => {
     curImage = img;
-    console.log(`Image 2 loaded`);
-    return wait(2);
+    console.log(`Image 2 loaded!`);
+    return wait(3);
   })
   .then(() => {
     curImage.style.display = 'none';
+    return createImage('img/img-3.jpg');
+  })
+  .then((img) => {
+    curImage = img;
+    console.log(`Image 3 loaded!`);
+    return wait(3);
+  })
+  .then(() => {
+    console.log(`App run successfully!`);
   })
   .catch((err) => {
-    console.log(`🚀  err =>`, err);
+    console.log(`Error: `, err);
+  }); */
+
+// 019 Consuming Promises with AsyncAwait
+
+const btn = document.querySelector('.btn-country');
+const countriesContainer = document.querySelector('.countries');
+
+const renderCountry = (data, className) => {
+  const html = `
+    <article class="country ${className}">
+      <img class="country__img" src="${data.flags.png}" />
+      <div class="country__data">
+        <h3 class="country__name">${data.name.common}</h3>
+        <h4 class="country__region">${data.region}</h4>
+        <p class="country__row"><span>👫</span>${(
+          +data.population / 1000000
+        ).toFixed(1)} people</p>
+        <p class="country__row"><span>🗣️</span>${data.languages.por}</p>
+        <p class="country__row"><span>💰</span>${data.currencies.EUR.name} ${
+    data.currencies.EUR.symbol
+  }</p>
+      </div>
+    </article>
+  `;
+
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
+};
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
   });
+};
+
+const whereAmI = async (country) => {
+  // Geolocation
+  const position = await getPosition();
+  const { latitude: lat, longitude: lng } = position.coords;
+
+  // Reverse geocoding
+  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+  const dataGeo = await resGeo.json();
+  console.log(`🚀  dataGeo =>`, dataGeo);
+
+  // Country data
+  const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+  const data = await res.json();
+  console.log(`🚀  data =>`, data);
+
+  renderCountry(data[0], '');
+};
+
+whereAmI(`portugal`);
