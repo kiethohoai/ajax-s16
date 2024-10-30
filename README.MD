@@ -10,3 +10,4 @@
 015 The Event Loop in Practice
 016 Building a Simple Promise
 017 Promisifying the Geolocation API
+018 Coding Challenge #2
