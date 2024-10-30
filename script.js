@@ -315,7 +315,7 @@ createImage('img/img-1.jpg')
 
 // 019 Consuming Promises with AsyncAwait
 
-const btn = document.querySelector('.btn-country');
+/* const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 const renderCountry = (data, className) => {
@@ -364,4 +364,13 @@ const whereAmI = async (country) => {
   renderCountry(data[0], '');
 };
 
-whereAmI(`portugal`);
+whereAmI(`portugal`); */
+
+// 020 Error Handling With try...catch
+try {
+  const x = 1;
+  let y = 2;
+  x = y;
+} catch (error) {
+  console.log(`🚀  error =>`, error);
+}
