@@ -24,3 +24,4 @@
 006 Top-Level await (ES2022)
 007 The Module Pattern
 008 CommonJS Modules
+009 A Brief Introduction to the Command Line
