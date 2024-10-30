@@ -9,3 +9,4 @@
 014 Asynchronous Behind the Scenes The Event Loop
 015 The Event Loop in Practice
 016 Building a Simple Promise
+017 Promisifying the Geolocation API

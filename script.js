@@ -206,3 +206,51 @@ getCountryAndNeigbour('portugal');
 //   getCountryData('portugal');
 // });
 
+/* 
+console.log(`1) Test start`);
+
+setTimeout(() => {
+  console.log(`5) 0 sec timer`);
+}, 0);
+
+Promise.resolve(`Resolved Promise 1`).then((res) => console.log(`3) ${res}`));
+Promise.reject(`Rejected Promise`).catch((err) => {
+  for (let i = 0; i < 10000000; i++) {}
+  console.log(`4) ${err}`);
+});
+
+console.log(`2) Test end`); */
+
+// 016 Building a Simple Promise
+/* 
+const temp = new Promise(function (resolve, reject) {
+  console.log(`Now start!`);
+
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      resolve(`YOU WIN 😘😘😘`);
+    } else {
+      reject(`YOU LOSE 🤣🤣🤣`);
+    }
+  }, 2000);
+});
+
+temp.then((res) => console.log(res)).catch((err) => console.error(err));
+ */
+
+// 017 Promisifying the Geolocation API
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => resolve(position),
+    //   (error) => reject(error),
+    // );
+
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition()
+  .then((pos) => console.log(pos))
+  .catch((err) => console.log(err));
