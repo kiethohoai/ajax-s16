@@ -28,3 +28,4 @@
 010 Introduction to NPM
 011 Bundling With Parcel and NPM Scripts
 012 Configuring Babel and Polyfilling
+013 Review Writing Clean and Modern JavaScript
